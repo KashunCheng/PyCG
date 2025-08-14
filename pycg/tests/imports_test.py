@@ -103,7 +103,8 @@ class ImportsTest(TestBase):
         im.set_pkg("somedir/somedir")
         old_sys_path = copy.deepcopy(sys.path)
         old_path_hooks = copy.deepcopy(sys.path_hooks)
-        custom_loader = "custom_loader"
+        def custom_loader(path):
+            pass
 
         with mock.patch(
             "importlib.machinery.FileFinder.path_hook", return_value=custom_loader

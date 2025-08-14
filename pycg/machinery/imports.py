@@ -217,12 +217,11 @@ class ImportManager(object):
         self.old_path = copy.deepcopy(sys.path)
 
         loader_details = loader, importlib.machinery.all_suffixes()
+        self._clear_caches()
         sys.path_hooks.insert(
             0, importlib.machinery.FileFinder.path_hook(loader_details)
         )
         sys.path.insert(0, os.path.abspath(self.mod_dir))
-
-        self._clear_caches()
 
     def remove_hooks(self):
         sys.path_hooks = self.old_path_hooks
